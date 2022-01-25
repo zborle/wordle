@@ -16,6 +16,7 @@ function App() {
     const [currentGuess, setCurrentGuess] = useState('')
     const [isGameWon, setIsGameWon] = useState(false)
     const [isWinModalOpen, setIsWinModalOpen] = useState(false)
+    const [isWinAnimationStarted, setIsWinAnimationStarted] = useState(false)
     const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
     const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
@@ -26,6 +27,9 @@ function App() {
     const [timeUntilNextWord, setTimeUntilNextWord] = useState(getTimeUntilNextWord());
     const [guesses, setGuesses] = useState<string[]>(() => {
         const loaded = loadGameStateFromLocalStorage()
+        if (loaded == null) {
+            setIsInfoModalOpen(true)
+        }
         if (loaded?.solutionIndex !== getWordOfDayIndex()) {
             return []
         }
@@ -57,7 +61,12 @@ function App() {
     }, [guesses])
 
     useEffect(() => {
-        const timeout = setTimeout(() => setIsWinModalOpen(isGameWon), 1000)
+        const timeout = setTimeout(() => setIsWinModalOpen(isGameWon), 2500)
+        return () => clearTimeout(timeout)
+    }, [isGameWon])
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setIsWinAnimationStarted(isGameWon), 150 * 5 + 250)
         return () => clearTimeout(timeout)
     }, [isGameWon])
 
@@ -142,7 +151,7 @@ function App() {
                 />
             </div>
             <Grid guesses={guesses} currentGuess={currentGuess}
-                  invalid={isNotEnoughLetters || isWordNotFoundAlertOpen} win={isGameWon}/>
+                  invalid={isNotEnoughLetters || isWordNotFoundAlertOpen} win={isWinAnimationStarted}/>
             <Keyboard
                 onChar={onChar}
                 onDelete={onDelete}

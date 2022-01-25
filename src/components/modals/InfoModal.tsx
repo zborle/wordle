@@ -62,11 +62,21 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
                                         Како се игра
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        <p className="text-sm text-gray-500">
-                                            Погодете го ЗБОРЛЕ во 6 обиди. По секој обид, бојата на
-                                            квадратите ќе се менува да ви покаже колку вашиот обид е
+                                        <p className="text-left text-md text-gray-500">
+                                            Погодете го <b>ЗБОРЛЕ</b> во 6 обиди.
+                                        </p>
+
+                                        <p className="text-left text-md text-gray-500 mt-2">
+                                            Секој обид мора да биде валиден збор од 5 букви.
+                                            Притиснете го копчето ENTER да направите обид.
+                                        </p>
+
+                                        <p className="text-left text-md text-gray-500 mt-2 border-b-2 pb-2">
+                                            По секој обид, бојата на квадратите ќе се менува да ви покаже колку вашиот обид е
                                             блиску до бараниот збор.
                                         </p>
+
+                                        <h4 className="font-bold text-gray-900 mt-2">Примери</h4>
 
                                         <div className="flex justify-center mb-1 mt-4">
                                             <Cell value="П" status="correct"/>
@@ -101,6 +111,10 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
                                             Буквата <b>К</b> не е во зборот на ниту една позиција.
                                         </p>
                                     </div>
+
+                                    <p className="text-left text-md text-gray-500 mt-2 border-t-2 pt-2">
+                                        Нов <b>ЗБОРЛЕ</b> е достапен секој ден.
+                                    </p>
                                 </div>
                             </div>
                         </div>
