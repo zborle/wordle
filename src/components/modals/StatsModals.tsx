@@ -14,11 +14,7 @@ type Props = {
 export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
     return (
         <Transition.Root show={isOpen} as={Fragment}>
-            <Dialog
-                as="div"
-                className="fixed z-10 inset-0 overflow-y-auto"
-                onClose={handleClose}
-            >
+            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={handleClose}>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
                         as={Fragment}
@@ -29,16 +25,13 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
-                    <span
-                        className="hidden sm:inline-block sm:align-middle sm:h-screen"
-                        aria-hidden="true"
-                    >
-            &#8203;
-          </span>
+                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                        &#8203;
+                    </span>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -54,10 +47,7 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                             transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6"
                         >
                             <div className="absolute right-4 top-4">
-                                <XIcon
-                                    className="h-6 w-6 cursor-pointer hover:bg-slate-200"
-                                    onClick={handleClose}
-                                />
+                                <XIcon className="h-6 w-6 cursor-pointer hover:bg-slate-200" onClick={handleClose} />
                             </div>
                             <div>
                                 <div className="text-center">
@@ -67,11 +57,11 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                                     >
                                         Статистика
                                     </Dialog.Title>
-                                    <StatBar gameStats={gameStats}/>
+                                    <StatBar gameStats={gameStats} />
                                     <h4 className="text-lg leading-6 font-medium text-gray-900 uppercase">
                                         Распределба на погодоци
                                     </h4>
-                                    <Histogram gameStats={gameStats}/>
+                                    <Histogram gameStats={gameStats} />
                                 </div>
                             </div>
                         </div>
