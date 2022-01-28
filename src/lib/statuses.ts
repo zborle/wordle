@@ -35,9 +35,7 @@ export type CharValue =
     | 'Н'
     | 'М'
 
-export const getStatuses = (
-    guesses: string[]
-): { [key: string]: CharStatus } => {
+export const getStatuses = (guesses: string[]): { [key: string]: CharStatus } => {
     const charObj: { [key: string]: CharStatus } = {}
     const solution = getWordOfDay()
 
@@ -91,9 +89,7 @@ export const getGuessStatuses = (guess: string): CharStatus[] => {
         }
 
         // now we are left with "present"s
-        const indexOfPresentChar = splitSolution.findIndex(
-            (x, index) => x === letter && !solutionCharsTaken[index]
-        )
+        const indexOfPresentChar = splitSolution.findIndex((x, index) => x === letter && !solutionCharsTaken[index])
 
         if (indexOfPresentChar > -1) {
             statuses[i] = 'present'

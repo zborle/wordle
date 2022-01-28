@@ -6,10 +6,7 @@ const EPOCH_START = 1640991600000
 const MS_IN_DAY = 86400000
 
 export const isWordInWordList = (word: string) => {
-    return (
-        WORDS.includes(word.toLowerCase()) ||
-        VALID_GUESSES.includes(word.toLowerCase())
-    )
+    return WORDS.includes(word.toLowerCase()) || VALID_GUESSES.includes(word.toLowerCase())
 }
 
 export const getWordOfDay = () => {
@@ -22,25 +19,24 @@ export const isWinningWord = (word: string) => {
 
 export const getWordOfDayIndex = () => {
     const now = Date.now()
-    return Math.floor((now - EPOCH_START) / MS_IN_DAY) % WORDS.length;
+    return Math.floor((now - EPOCH_START) / MS_IN_DAY) % WORDS.length
 }
 
 export const getTimeUntilNextWord = () => {
     const solutionIndex = getWordOfDayIndex()
-    const time = (EPOCH_START + (solutionIndex + 1) * MS_IN_DAY) - Date.now()
+    const time = EPOCH_START + (solutionIndex + 1) * MS_IN_DAY - Date.now()
     const date = new Date(time)
     return {
         hours: (24 + (date.getHours() - 1)) % 24,
         minutes: date.getMinutes(),
         seconds: date.getSeconds(),
-        solutionIndex: solutionIndex
+        solutionIndex: solutionIndex,
     }
 }
 export type Time = {
-    hours: number,
-    minutes: number,
+    hours: number
+    minutes: number
     seconds: number
 }
 
-export const formatTime = (time: number) => time >= 10 ? `${time}` : `0${time}`
-
+export const formatTime = (time: number) => (time >= 10 ? `${time}` : `0${time}`)

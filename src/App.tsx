@@ -7,10 +7,10 @@ import { AboutModal } from './components/modals/AboutModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
 import { getTimeUntilNextWord, getWordOfDay, getWordOfDayIndex, isWinningWord, isWordInWordList } from './lib/words'
-import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage, } from './lib/localStorage'
-import { convert, LETTERS_EN } from './lib/keyboard';
-import { addStatsForCompletedGame, loadStats } from "./lib/stats";
-import { StatsModal } from "./components/modals/StatsModals";
+import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from './lib/localStorage'
+import { convert, LETTERS_EN } from './lib/keyboard'
+import { addStatsForCompletedGame, loadStats } from './lib/stats'
+import { StatsModal } from './components/modals/StatsModals'
 
 function App() {
     const [currentGuess, setCurrentGuess] = useState('')
@@ -24,7 +24,7 @@ function App() {
     const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
     const [isGameLost, setIsGameLost] = useState(false)
     const [shareComplete, setShareComplete] = useState(false)
-    const [timeUntilNextWord, setTimeUntilNextWord] = useState(getTimeUntilNextWord());
+    const [timeUntilNextWord, setTimeUntilNextWord] = useState(getTimeUntilNextWord())
     const [guesses, setGuesses] = useState<string[]>(() => {
         const loaded = loadGameStateFromLocalStorage()
         if (loaded == null) {
@@ -43,21 +43,24 @@ function App() {
 
     useEffect(() => {
         const state = loadGameStateFromLocalStorage()
-        if (!state || (state?.solutionIndex === timeUntilNextWord.solutionIndex)) {
+        if (!state || state?.solutionIndex === timeUntilNextWord.solutionIndex) {
             if (isWinModalOpen) {
                 const timer = setTimeout(() => {
-                    setTimeUntilNextWord(getTimeUntilNextWord);
-                }, 1000);
-                return () => clearTimeout(timer);
+                    setTimeUntilNextWord(getTimeUntilNextWord)
+                }, 1000)
+                return () => clearTimeout(timer)
             }
         } else {
             setIsGameWon(false)
             setGuesses([])
         }
-    }, [timeUntilNextWord, isWinModalOpen]);
+    }, [timeUntilNextWord, isWinModalOpen])
 
     useEffect(() => {
-        saveGameStateToLocalStorage({ guesses, solutionIndex: getWordOfDayIndex() })
+        saveGameStateToLocalStorage({
+            guesses,
+            solutionIndex: getWordOfDayIndex(),
+        })
     }, [guesses])
 
     useEffect(() => {
@@ -74,9 +77,9 @@ function App() {
         if (isGameWon) {
             return
         }
-        let converted = value;
+        let converted = value
         if (LETTERS_EN.includes(value)) {
-            converted = convert(value);
+            converted = convert(value)
         }
         if (currentGuess.length < 5 && guesses.length < 6) {
             setCurrentGuess(`${currentGuess}${converted}`)
@@ -128,36 +131,22 @@ function App() {
 
     return (
         <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <Alert message="Немате внесено доволно букви" isOpen={isNotEnoughLetters}/>
-            <Alert message="Зборот не е пронајден во речникот на Зборле" isOpen={isWordNotFoundAlertOpen}/>
-            <Alert
-                message={`Изгубивте, бараниот збор е ${getWordOfDay()}`}
-                isOpen={isGameLost}
-            />
-            <Alert
-                message="Копирано во clipboard за споделулвање"
-                isOpen={shareComplete}
-                variant="success"
-            />
+            <Alert message="Немате внесено доволно букви" isOpen={isNotEnoughLetters} />
+            <Alert message="Зборот не е пронајден во речникот на Зборле" isOpen={isWordNotFoundAlertOpen} />
+            <Alert message={`Изгубивте, бараниот збор е ${getWordOfDay()}`} isOpen={isGameLost} />
+            <Alert message="Копирано во clipboard за споделулвање" isOpen={shareComplete} variant="success" />
             <div className="flex w-80 mx-auto items-center mb-2">
-                <QuestionMarkCircleIcon
-                    className="h-6 w-6 cursor-pointer"
-                    onClick={() => setIsInfoModalOpen(true)}
-                />
+                <QuestionMarkCircleIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsInfoModalOpen(true)} />
                 <h1 className="text-4xl text-center text-slate-700 tracking-widest grow uppercase font-bold">Зборле</h1>
-                <ChartBarIcon
-                    className="h-6 w-6 cursor-pointer"
-                    onClick={() => setIsStatsModalOpen(true)}
-                />
+                <ChartBarIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsStatsModalOpen(true)} />
             </div>
-            <Grid guesses={guesses} currentGuess={currentGuess}
-                  invalid={isNotEnoughLetters || isWordNotFoundAlertOpen} win={isWinAnimationStarted}/>
-            <Keyboard
-                onChar={onChar}
-                onDelete={onDelete}
-                onEnter={onEnter}
+            <Grid
                 guesses={guesses}
+                currentGuess={currentGuess}
+                invalid={isNotEnoughLetters || isWordNotFoundAlertOpen}
+                win={isWinAnimationStarted}
             />
+            <Keyboard onChar={onChar} onDelete={onDelete} onEnter={onEnter} guesses={guesses} />
             <WinModal
                 isOpen={isWinModalOpen}
                 handleClose={() => setIsWinModalOpen(false)}
@@ -171,19 +160,9 @@ function App() {
                 }}
                 timeLeft={timeUntilNextWord}
             />
-            <InfoModal
-                isOpen={isInfoModalOpen}
-                handleClose={() => setIsInfoModalOpen(false)}
-            />
-            <StatsModal
-                isOpen={isStatsModalOpen}
-                handleClose={() => setIsStatsModalOpen(false)}
-                gameStats={stats}
-            />
-            <AboutModal
-                isOpen={isAboutModalOpen}
-                handleClose={() => setIsAboutModalOpen(false)}
-            />
+            <InfoModal isOpen={isInfoModalOpen} handleClose={() => setIsInfoModalOpen(false)} />
+            <StatsModal isOpen={isStatsModalOpen} handleClose={() => setIsStatsModalOpen(false)} gameStats={stats} />
+            <AboutModal isOpen={isAboutModalOpen} handleClose={() => setIsAboutModalOpen(false)} />
 
             <button
                 type="button"
