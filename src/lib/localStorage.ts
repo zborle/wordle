@@ -33,3 +33,13 @@ export const loadStatsFromLocalStorage = () => {
     const stats = localStorage.getItem(gameStatKey)
     return stats ? (JSON.parse(stats) as GameStats) : null
 }
+
+export const saveDarkThemeToLocalStorage = (status: any) => {
+    localStorage.setItem('dark-theme', status);
+}
+
+export const loadDarkThemeFromLocalStorage = () => {
+    const theme = localStorage.getItem('dark-theme');
+    if(theme) return theme;
+    else return null;
+}
