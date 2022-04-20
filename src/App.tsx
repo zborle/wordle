@@ -134,7 +134,7 @@ function App() {
             <Alert message="Немате внесено доволно букви" isOpen={isNotEnoughLetters} />
             <Alert message="Зборот не е пронајден во речникот на Зборле" isOpen={isWordNotFoundAlertOpen} />
             <Alert message={`Изгубивте, бараниот збор е ${getWordOfDay()}`} isOpen={isGameLost} />
-            <Alert message="Копирано во clipboard за споделулвање" isOpen={shareComplete} variant="success" />
+            <Alert message="Копирано во clipboard за споделување" isOpen={shareComplete} variant="success" />
             <div className="flex w-80 mx-auto items-center mb-2">
                 <QuestionMarkCircleIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsInfoModalOpen(true)} />
                 <h1 className="text-4xl text-center text-slate-700 tracking-widest grow uppercase font-bold">Зборле</h1>
