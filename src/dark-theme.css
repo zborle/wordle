@@ -1,0 +1,17 @@
+#root {
+	background: white;
+	height: 100vh;
+}
+
+.dark {
+	filter: invert(1) hue-rotate(180deg);
+}
+
+.dark * {
+	color: black;
+}
+
+.dark img, .dark .bg-green-500, .dark .bg-yellow-500, .dark .bg-slate-400 {
+	filter: invert(1) hue-rotate(180deg);
+	color: white;
+}

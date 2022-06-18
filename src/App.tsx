@@ -8,9 +8,11 @@ import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
 import { getTimeUntilNextWord, getWordOfDay, getWordOfDayIndex, isWinningWord, isWordInWordList } from './lib/words'
 import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from './lib/localStorage'
+import { loadDarkThemeFromLocalStorage, saveDarkThemeToLocalStorage } from './lib/localStorage'
 import { convert, LETTERS_EN } from './lib/keyboard'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import { StatsModal } from './components/modals/StatsModals'
+import './dark-theme.css'
 
 function App() {
     const [currentGuess, setCurrentGuess] = useState('')
@@ -40,6 +42,35 @@ function App() {
     })
 
     const [stats, setStats] = useState(() => loadStats())
+
+    /*
+    const [darkTheme, setDarkTheme] = useState(() => {
+        const darkThemeLoaded = loadDarkThemeFromLocalStorage()
+        if(darkThemeLoaded == null) {
+            saveDarkThemeToLocalStorage(false)
+        } else {
+            setDarkTheme(darkThemeLoaded);
+        }
+    });*/
+
+    const [darkTheme, setDarkTheme] = useState(() => {
+        const theme = loadDarkThemeFromLocalStorage();
+        if(theme === 'true') return true
+        else return false
+    })
+    const [themeIcon, setThemeIcon] = useState('');
+
+    useEffect(() => {
+        if(darkTheme) {
+            document.body.classList.add('dark')
+            setThemeIcon('https://twemoji.maxcdn.com/v/13.0.1/svg/1f31e.svg')
+        } else {
+            document.body.classList.remove('dark')
+            setThemeIcon('https://twemoji.maxcdn.com/v/13.0.1/svg/1f311.svg')   
+        }
+
+        saveDarkThemeToLocalStorage(darkTheme);
+    }, [darkTheme])
 
     useEffect(() => {
         const state = loadGameStateFromLocalStorage()
@@ -164,17 +195,30 @@ function App() {
             <StatsModal isOpen={isStatsModalOpen} handleClose={() => setIsStatsModalOpen(false)} gameStats={stats} />
             <AboutModal isOpen={isAboutModalOpen} handleClose={() => setIsAboutModalOpen(false)} />
 
-            <button
-                type="button"
-                className="mx-auto mt-8 flex items-center px-4 py-1 border border-transparent text-xs font-medium rounded text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
-                onClick={() => setIsAboutModalOpen(true)}
-            >
-                <InformationCircleIcon
-                    className="h-6 w-6 cursor-pointer mr-2"
-                    onClick={() => setIsInfoModalOpen(true)}
-                />
-                За играта
-            </button>
+            <div className='buttons' style={{display: 'flex', justifyContent: 'center'}}>
+                <button
+                    type="button"
+                    className="mt-8 flex items-center px-4 py-1 border border-transparent text-xs font-medium rounded text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    style={{marginLeft: '10px', marginRight: '10px'}}
+                    onClick={() => setIsAboutModalOpen(true)}
+                >
+                    <InformationCircleIcon
+                        className="h-6 w-6 cursor-pointer mr-2"
+                        onClick={() => setIsInfoModalOpen(true)}
+                    />
+                    За играта
+                </button>
+                
+                <button
+                    type="button"
+                    className="mt-8 flex items-center px-4 py-1 border border-transparent text-xs font-medium rounded text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    style={{marginLeft: '10px', marginRight: '10px'}}
+                    onClick={() => setDarkTheme(!darkTheme)}
+                >
+                    Тема:
+                    <img style={{height: '20px', marginLeft: '5px'}} src={themeIcon} alt="Theme Icon" />
+                    </button>
+            </div>
         </div>
     )
 }
