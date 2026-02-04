@@ -1,4 +1,4 @@
-import { ChartBarIcon, InformationCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
+import { ChartBarIcon, InformationCircleIcon, QuestionMarkCircleIcon, SunIcon, MoonIcon } from '@heroicons/react/outline'
 import { useEffect, useState } from 'react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
@@ -11,6 +11,7 @@ import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from './li
 import { convert, LETTERS_EN } from './lib/keyboard'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import { StatsModal } from './components/modals/StatsModals'
+import { useTheme } from './context/ThemeContext'
 
 function App() {
     const [currentGuess, setCurrentGuess] = useState('')
@@ -40,6 +41,8 @@ function App() {
     })
 
     const [stats, setStats] = useState(() => loadStats())
+
+    const { theme, toggleTheme } = useTheme()
 
     useEffect(() => {
         const state = loadGameStateFromLocalStorage()
@@ -130,15 +133,15 @@ function App() {
     }
 
     return (
-        <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8 dark:bg-slate-900 min-h-screen flex flex-col">
             <Alert message="Немате внесено доволно букви" isOpen={isNotEnoughLetters} />
             <Alert message="Зборот не е пронајден во речникот на Зборле" isOpen={isWordNotFoundAlertOpen} />
             <Alert message={`Изгубивте, бараниот збор е ${getWordOfDay()}`} isOpen={isGameLost} />
             <Alert message="Копирано во clipboard за споделување" isOpen={shareComplete} variant="success" />
             <div className="flex w-80 mx-auto items-center mb-2">
-                <QuestionMarkCircleIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsInfoModalOpen(true)} />
-                <h1 className="text-4xl text-center text-slate-700 tracking-widest grow uppercase font-bold">Зборле</h1>
-                <ChartBarIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsStatsModalOpen(true)} />
+                <QuestionMarkCircleIcon className="h-6 w-6 cursor-pointer dark:text-slate-300" onClick={() => setIsInfoModalOpen(true)} />
+                <h1 className="text-4xl text-center text-slate-700 dark:text-slate-200 tracking-widest grow uppercase font-bold">Зборле</h1>
+                <ChartBarIcon className="h-6 w-6 cursor-pointer dark:text-slate-300" onClick={() => setIsStatsModalOpen(true)} />
             </div>
             <Grid
                 guesses={guesses}
@@ -164,17 +167,31 @@ function App() {
             <StatsModal isOpen={isStatsModalOpen} handleClose={() => setIsStatsModalOpen(false)} gameStats={stats} />
             <AboutModal isOpen={isAboutModalOpen} handleClose={() => setIsAboutModalOpen(false)} />
 
-            <button
-                type="button"
-                className="mx-auto mt-8 flex items-center px-4 py-1 border border-transparent text-xs font-medium rounded text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
-                onClick={() => setIsAboutModalOpen(true)}
-            >
-                <InformationCircleIcon
-                    className="h-6 w-6 cursor-pointer mr-2"
-                    onClick={() => setIsInfoModalOpen(true)}
-                />
-                За играта
-            </button>
+            <div className="mt-auto mx-auto flex items-center gap-4 pb-4">
+                <button
+                    type="button"
+                    className="flex items-center px-4 py-1 border border-transparent text-xs font-medium rounded text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    onClick={() => setIsAboutModalOpen(true)}
+                >
+                    <InformationCircleIcon
+                        className="h-6 w-6 cursor-pointer mr-2 dark:text-slate-300"
+                        onClick={() => setIsAboutModalOpen(true)}
+                    />
+                    За играта
+                </button>
+                <button
+                    type="button"
+                    onClick={toggleTheme}
+                    className="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    aria-label="Toggle dark mode"
+                >
+                    {theme === 'light' ? (
+                        <MoonIcon className="h-5 w-5 text-slate-700" />
+                    ) : (
+                        <SunIcon className="h-5 w-5 text-slate-200" />
+                    )}
+                </button>
+            </div>
         </div>
     )
 }

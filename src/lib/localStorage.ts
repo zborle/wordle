@@ -33,3 +33,17 @@ export const loadStatsFromLocalStorage = () => {
     const stats = localStorage.getItem(gameStatKey)
     return stats ? (JSON.parse(stats) as GameStats) : null
 }
+
+// Dark mode
+const themeKey = 'theme'
+
+export type Theme = 'light' | 'dark'
+
+export const saveThemeToLocalStorage = (theme: Theme) => {
+    localStorage.setItem(themeKey, theme)
+}
+
+export const loadThemeFromLocalStorage = (): Theme | null => {
+    const theme = localStorage.getItem(themeKey)
+    return theme === 'dark' || theme === 'light' ? theme : null
+}

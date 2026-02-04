@@ -28,7 +28,7 @@ export const WinModal = ({ isOpen, handleClose, guesses, handleShare, timeLeft }
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-80 transition-opacity" />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
@@ -44,24 +44,24 @@ export const WinModal = ({ isOpen, handleClose, guesses, handleShare, timeLeft }
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                        <div className="inline-block align-bottom bg-white dark:bg-slate-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                             <div className="absolute right-4 top-4">
                                 <XIcon
-                                    className="h-6 w-6 cursor-pointer hover:bg-slate-200"
+                                    className="h-6 w-6 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600"
                                     onClick={() => handleClose()}
                                 />
                             </div>
                             <div>
-                                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                                    <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
+                                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900">
+                                    <CheckIcon className="h-6 w-6 text-green-600 dark:text-green-400" aria-hidden="true" />
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
-                                    <Dialog.Title as="h3" className="text-lg leading-6 font-bold text-slate-900">
+                                    <Dialog.Title as="h3" className="text-lg leading-6 font-bold text-slate-900 dark:text-gray-100">
                                         Го погодивте зборот!
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <MiniGrid guesses={guesses} />
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">
                                             Одлично, споделете го резултатот од играта.
                                         </p>
                                     </div>
@@ -73,7 +73,7 @@ export const WinModal = ({ isOpen, handleClose, guesses, handleShare, timeLeft }
                             <div className="mt-5 sm:mt-6">
                                 <button
                                     type="button"
-                                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-slate-600 text-base font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 sm:text-sm"
+                                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-slate-600 dark:bg-slate-500 text-base font-medium text-white hover:bg-slate-700 dark:hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 sm:text-sm"
                                     onClick={() => {
                                         shareStatus(guesses)
                                         handleShare()

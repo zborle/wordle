@@ -21,7 +21,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-80 transition-opacity" />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
@@ -37,28 +37,28 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                        <div className="inline-block align-bottom bg-white dark:bg-slate-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                             <div className="absolute right-4 top-4">
                                 <XIcon
-                                    className="h-6 w-6 cursor-pointer hover:bg-slate-200"
+                                    className="h-6 w-6 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600"
                                     onClick={() => handleClose()}
                                 />
                             </div>
                             <div>
                                 <div className="text-center">
-                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                                         За играта
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">
                                             Ова е игра со отворен изворен код на играта Wordle -{' '}
-                                            <a href="https://github.com/zborle/wordle" className="underline font-bold">
+                                            <a href="https://github.com/zborle/wordle" className="underline font-bold text-blue-600 dark:text-blue-400">
                                                 видете го кодот овде
                                             </a>{' '}
                                             и{' '}
                                             <a
                                                 href="https://www.powerlanguage.co.uk/wordle/"
-                                                className="underline font-bold"
+                                                className="underline font-bold text-blue-600 dark:text-blue-400"
                                             >
                                                 играјте ја оргиналната игра
                                             </a>

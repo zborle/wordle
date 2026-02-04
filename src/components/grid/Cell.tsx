@@ -24,11 +24,11 @@ export const Cell = ({ value, status, completed = false, delay = 0, invalid = fa
     let classes = classnames(
       'w-14 h-14 border-solid border-2 flex items-center justify-center mx-0.5 text-2xl font-bold rounded',
       {
-          'bg-white border-slate-200': !status,
-          'bg-slate-400 text-white border-slate-400': status === 'absent' && showColor,
+          'bg-white dark:bg-slate-600 border-slate-200 dark:border-slate-500': !status,
+          'bg-slate-400 dark:bg-slate-600 text-white border-slate-400 dark:border-slate-500': status === 'absent' && showColor,
           'bg-green-500 text-white border-green-500': status === 'correct' && showColor,
           'bg-yellow-500 text-white border-yellow-500': status === 'present' && showColor,
-          'pop-in border-slate-400': !status && value,
+          'pop-in border-slate-400 dark:border-slate-500': !status && value,
           'flip-in': animationState === AnimationState.FlipIn,
           'flip-out': animationState === AnimationState.FlipOut,
           'shake': invalid,
