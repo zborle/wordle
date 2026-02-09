@@ -3,6 +3,7 @@
     "version": "0.8.0-SNAPSHOT",
     "private": true,
     "type": "module",
+    "homepage": "https://zborle.mk",
     "dependencies": {
         "@headlessui/react": "^2.2.0",
         "@heroicons/react": "^2.2.0",
@@ -15,10 +16,13 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "test": "vitest"
+        "test": "vitest",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^6.6.3",
+        "gh-pages": "^6.2.0",
         "@testing-library/react": "^16.2.0",
         "@testing-library/user-event": "^14.6.1",
         "@types/jest": "^29.5.14",
