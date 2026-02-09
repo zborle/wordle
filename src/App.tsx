@@ -52,7 +52,7 @@ function App() {
         if (!state || state?.solutionIndex === timeUntilNextWord.solutionIndex) {
             if (isWinModalOpen) {
                 const timer = setTimeout(() => {
-                    setTimeUntilNextWord(getTimeUntilNextWord)
+                    setTimeUntilNextWord(getTimeUntilNextWord())
                 }, 1000)
                 return () => clearTimeout(timer)
             }
