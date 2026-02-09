@@ -13,10 +13,10 @@ type Props = {
 
 export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
     return (
-        <Transition show={isOpen} as={Fragment}>
+        <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={handleClose}>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <Transition
+                    <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
                         enterFrom="opacity-0"
@@ -25,14 +25,13 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                    </Transition>
+                        <div className="fixed inset-0 bg-gray-500 dark:bg-black bg-opacity-75 dark:bg-opacity-70 transition-opacity" />
+                    </Transition.Child>
 
-                    {/* This element is to trick the browser into centering the modal contents. */}
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
                         &#8203;
                     </span>
-                    <Transition
+                    <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
                         enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -41,36 +40,35 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div
-                            className="inline-block align-bottom bg-white rounded-lg px-4
-                            pt-5 pb-4 text-left overflow-hidden shadow-xl transform
-                            transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6"
-                        >
+                        <div className="inline-block align-bottom bg-white dark:bg-slate-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                             <div className="absolute right-4 top-4">
-                                <XMarkIcon
-                                    className="h-6 w-6 cursor-pointer hover:bg-slate-200"
+                                <button
                                     onClick={handleClose}
-                                />
+                                    className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                                    aria-label="Затвори"
+                                >
+                                    <XMarkIcon className="h-6 w-6 text-slate-500 dark:text-slate-400" />
+                                </button>
                             </div>
                             <div>
                                 <div className="text-center">
                                     <DialogTitle
                                         as="h3"
-                                        className="text-lg leading-6 font-medium text-gray-900 uppercase"
+                                        className="text-lg leading-6 font-bold text-slate-900 dark:text-slate-100 uppercase"
                                     >
                                         Статистика
                                     </DialogTitle>
                                     <StatBar gameStats={gameStats} />
-                                    <h4 className="text-lg leading-6 font-medium text-gray-900 uppercase">
+                                    <h4 className="text-lg leading-6 font-bold text-slate-900 dark:text-slate-100 uppercase mt-4">
                                         Распределба на погодоци
                                     </h4>
                                     <Histogram gameStats={gameStats} />
                                 </div>
                             </div>
                         </div>
-                    </Transition>
+                    </Transition.Child>
                 </div>
             </Dialog>
-        </Transition>
+        </Transition.Root>
     )
 }

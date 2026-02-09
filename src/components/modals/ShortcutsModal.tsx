@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Dialog, DialogTitle, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 type Props = {
@@ -7,7 +7,14 @@ type Props = {
     handleClose: () => void
 }
 
-export const AboutModal = ({ isOpen, handleClose }: Props) => {
+const shortcuts = [
+    { key: 'A-Z', description: 'Внеси буква' },
+    { key: 'ENTER', description: 'Потврди го обидот' },
+    { key: 'BACKSPACE', description: 'Избриши ја последната буква' },
+    { key: '?', description: 'Прикажи ги тастатурските кратенки' },
+]
+
+export const ShortcutsModal = ({ isOpen, handleClose }: Props) => {
     return (
         <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={handleClose}>
@@ -48,29 +55,26 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
                             </div>
                             <div>
                                 <div className="text-center">
-                                    <DialogTitle
+                                    <Dialog.Title
                                         as="h3"
                                         className="text-lg leading-6 font-bold text-slate-900 dark:text-slate-100"
                                     >
-                                        За играта
-                                    </DialogTitle>
-                                    <div className="mt-2">
-                                        <p className="text-sm text-slate-600 dark:text-slate-300">
-                                            Ова е игра со отворен изворен код на играта Wordle -{' '}
-                                            <a
-                                                href="https://github.com/zborle/wordle"
-                                                className="underline font-bold text-green-600 dark:text-green-400"
+                                        Тастатурски кратенки
+                                    </Dialog.Title>
+                                    <div className="mt-4 space-y-3">
+                                        {shortcuts.map((shortcut) => (
+                                            <div
+                                                key={shortcut.key}
+                                                className="flex items-center justify-between py-2 px-3 bg-slate-100 dark:bg-slate-700 rounded-lg"
                                             >
-                                                видете го кодот овде
-                                            </a>{' '}
-                                            и{' '}
-                                            <a
-                                                href="https://www.powerlanguage.co.uk/wordle/"
-                                                className="underline font-bold text-green-600 dark:text-green-400"
-                                            >
-                                                играјте ја оргиналната игра
-                                            </a>
-                                        </p>
+                                                <kbd className="px-2 py-1 bg-white dark:bg-slate-600 border border-slate-300 dark:border-slate-500 rounded text-sm font-mono text-slate-700 dark:text-slate-200 shadow-sm">
+                                                    {shortcut.key}
+                                                </kbd>
+                                                <span className="text-sm text-slate-600 dark:text-slate-300">
+                                                    {shortcut.description}
+                                                </span>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

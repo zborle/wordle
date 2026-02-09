@@ -7,8 +7,8 @@ type Props = {
 const StatItem = ({ label, value }: { label: string; value: string | number }) => {
     return (
         <div className="items-center justify-center m-1 w-1/4">
-            <div className="text-3xl">{value}</div>
-            <div className="text-xs">{label}</div>
+            <div className="text-3xl font-bold text-slate-900 dark:text-slate-100">{value}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">{label}</div>
         </div>
     )
 }

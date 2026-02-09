@@ -2,6 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties for theming */
+:root {
+    /* Light mode colors */
+    --color-bg: #ffffff;
+    --color-bg-secondary: #f8fafc;
+    --color-text: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-muted: #64748b;
+    --color-border: #e2e8f0;
+    --color-border-hover: #cbd5e1;
+
+    /* Cell colors */
+    --cell-bg: #ffffff;
+    --cell-bg-filled: #ffffff;
+    --cell-border: #d1d5db;
+    --cell-border-active: #94a3b8;
+    --cell-text: #0f172a;
+    --cell-text-filled: #0f172a;
+
+    /* Keyboard colors */
+    --key-bg: #e2e8f0;
+    --key-bg-hover: #cbd5e1;
+    --key-bg-active: #94a3b8;
+    --key-text: #0f172a;
+
+    /* Modal */
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+    --modal-bg: #ffffff;
+    --modal-text: #0f172a;
+
+    /* Alert colors */
+    --alert-success-bg: #dcfce7;
+    --alert-success-text: #166534;
+    --alert-error-bg: #fee2e2;
+    --alert-error-text: #991b1b;
+    --alert-warning-bg: #fef3c7;
+    --alert-warning-text: #92400e;
+
+    /* Game state colors (consistent across themes) */
+    --color-correct: #22c55e;
+    --color-present: #eab308;
+    --color-absent: #64748b;
+}
+
+/* Dark mode colors */
+.dark {
+    --color-bg: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #94a3b8;
+    --color-border: #334155;
+    --color-border-hover: #475569;
+
+    /* Cell colors */
+    --cell-bg: #1e293b;
+    --cell-bg-filled: #1e293b;
+    --cell-border: #475569;
+    --cell-border-active: #64748b;
+    --cell-text: #f1f5f9;
+    --cell-text-filled: #f1f5f9;
+
+    /* Keyboard colors */
+    --key-bg: #334155;
+    --key-bg-hover: #475569;
+    --key-bg-active: #64748b;
+    --key-text: #f1f5f9;
+
+    /* Modal */
+    --modal-overlay: rgba(0, 0, 0, 0.7);
+    --modal-bg: #1e293b;
+    --modal-text: #f1f5f9;
+
+    /* Alert colors - adjusted for dark mode */
+    --alert-success-bg: #14532d;
+    --alert-success-text: #86efac;
+    --alert-error-bg: #7f1d1d;
+    --alert-error-text: #fca5a5;
+    --alert-warning-bg: #78350f;
+    --alert-warning-text: #fcd34d;
+}
+
+/* Smooth theme transitions */
+html {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Animations */
 .pop-in {
     animation-name: PopIn;
     animation-duration: 100ms;
@@ -12,7 +110,6 @@
         transform: scale(0.8);
         opacity: 0;
     }
-
     40% {
         transform: scale(1.1);
         opacity: 1;
@@ -40,7 +137,6 @@
     }
 }
 
-
 @keyframes FlipIn {
     0% {
         transform: rotateX(0);
@@ -50,13 +146,16 @@
     }
 }
 
+/* Enhanced win animation */
 .win {
     animation-name: Bounce;
     animation-duration: 1000ms;
+    animation-fill-mode: both;
 }
 
 @keyframes Bounce {
-    0%, 20% {
+    0%,
+    20% {
         transform: translateY(0);
     }
     40% {
@@ -76,31 +175,88 @@
     }
 }
 
+/* Enhanced shake animation */
 .shake {
     animation-name: Shake;
-    animation-duration: 600ms;
-
+    animation-duration: 500ms;
 }
 
 @keyframes Shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
     10%,
-    90% {
-        transform: translateX(-1px);
-    }
-
-    20%,
-    80% {
-        transform: translateX(2px);
-    }
-
     30%,
     50%,
-    70% {
+    70%,
+    90% {
         transform: translateX(-4px);
     }
-
+    20%,
     40%,
-    60% {
+    60%,
+    80% {
         transform: translateX(4px);
     }
+}
+
+/* Cell flip animation with color reveal */
+.cell-flip {
+    animation: CellFlip 0.5s ease-in-out;
+}
+
+@keyframes CellFlip {
+    0% {
+        transform: rotateX(0);
+    }
+    50% {
+        transform: rotateX(-90deg);
+    }
+    100% {
+        transform: rotateX(0);
+    }
+}
+
+/* Smooth hover transitions */
+.hover-lift {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus styles for accessibility */
+.focus-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Prevent text selection on game elements */
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
 }
