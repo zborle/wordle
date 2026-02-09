@@ -4,8 +4,8 @@ import { getWordOfDayIndex } from './words'
 export const shareStatus = (guesses: string[]) => {
     navigator.clipboard.writeText(
         `Зборле ${getWordOfDayIndex()} ${guesses.length}/6\n\n${generateEmojiGrid(
-            guesses
-        )}\n\nИграјте ЗБОРЛЕ https://zborle.mk`
+            guesses,
+        )}\n\nИграјте ЗБОРЛЕ https://zborle.mk`,
     )
 }
 
@@ -15,7 +15,7 @@ export const generateEmojiGrid = (guesses: string[]) => {
             const status = getGuessStatuses(guess)
             return guess
                 .split('')
-                .map((letter, i) => {
+                .map((_, i) => {
                     switch (status[i]) {
                         case 'correct':
                             return '🟩'

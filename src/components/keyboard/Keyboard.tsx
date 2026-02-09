@@ -2,7 +2,7 @@ import { FIRST_ROW, KeyValue, LETTERS_EN, LETTERS_MK, SECOND_ROW, THIRD_ROW } fr
 import { CharValue, getStatuses } from '../../lib/statuses'
 import { Key } from './Key'
 import { useEffect } from 'react'
-import { BackspaceIcon } from '@heroicons/react/outline'
+import { BackspaceIcon } from '@heroicons/react/24/outline'
 
 type Props = {
     onChar: (value: string) => void
