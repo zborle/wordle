@@ -1,2 +1,2 @@
-rm -rf static/
-cp -r build/* .
+bun run build
+bun run deploy

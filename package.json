@@ -4,6 +4,10 @@
     "private": true,
     "type": "module",
     "homepage": "https://zborle.mk",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zborle/wordle.git"
+    },
     "dependencies": {
         "@headlessui/react": "^2.2.0",
         "@heroicons/react": "^2.2.0",
@@ -14,11 +18,10 @@
     },
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "tsc && vite build && cp CNAME dist/",
         "preview": "vite preview",
         "test": "vitest",
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d dist"
+        "deploy": "gh-pages -d dist -b gh-pages"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^6.6.3",

@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Dialog, DialogTitle, Transition } from '@headlessui/react'
+import { Dialog, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StatBar } from '../stats/StatBar'
 import { Histogram } from '../stats/Histogram'
@@ -13,10 +13,10 @@ type Props = {
 
 export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
     return (
-        <Transition.Root show={isOpen} as={Fragment}>
+        <Transition show={isOpen} as={Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={handleClose}>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <Transition.Child
+                    <TransitionChild
                         as={Fragment}
                         enter="ease-out duration-300"
                         enterFrom="opacity-0"
@@ -26,12 +26,12 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                         leaveTo="opacity-0"
                     >
                         <div className="fixed inset-0 bg-gray-500 dark:bg-black bg-opacity-75 dark:bg-opacity-70 transition-opacity" />
-                    </Transition.Child>
+                    </TransitionChild>
 
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
                         &#8203;
                     </span>
-                    <Transition.Child
+                    <TransitionChild
                         as={Fragment}
                         enter="ease-out duration-300"
                         enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -66,9 +66,9 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                                 </div>
                             </div>
                         </div>
-                    </Transition.Child>
+                    </TransitionChild>
                 </div>
             </Dialog>
-        </Transition.Root>
+        </Transition>
     )
 }
